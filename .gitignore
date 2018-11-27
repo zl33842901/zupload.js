@@ -3,3 +3,11 @@
 ################################################################################
 
 /WebApp/bin
+/.vs
+/WebApp/obj/Debug
+/WebApp/App_Start
+/WebApp/Properties
+/WebApp/WebApp.csproj.user
+/WebApp/Web.Release.config
+/WebApp/Web.Debug.config
+/WebApp/packages.config

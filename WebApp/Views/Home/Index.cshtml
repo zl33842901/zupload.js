@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/ZlUpload.js"></script>
+</head>
+<body>
+
+    <a href="javascript:;" id="ASf">test</a>
+    <div></div>
+    <input value="tttt" type="button" id="BtnU" />
+
+    <script type="text/javascript">
+        var ddd = $("#ASf").ZUpload({ //弹出选择文件的钮。
+            fileWaitingContainer: "div",//待上传的文件名，列在哪里。
+            url: "/Home/Upload",//上传路径
+            params: { mypp : "随便传个参数。"}, //页面参数
+            buttonUpload: "#BtnU",//哪个钮执行上传动作。
+            onSuccess: function (res) {
+                //成功的方法
+            },
+            onFailure: function (res) {
+                //失败的方法
+            }
+        });
+    </script>
+
+</body>
+</html>
