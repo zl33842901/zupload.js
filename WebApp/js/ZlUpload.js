@@ -12,7 +12,7 @@
         return this.each(function () {
             $this = $(this);
             var tid = "FileZUpload" + (i++);
-            var thtml = "<input type=\"file\" id=\"" + tid + "\" style=\"display: none\" " + (opts.multi ? "multiple" : "") + " />";
+            var thtml = "<input type=\"file\" id=\"" + tid + "\" style=\"display: none\" " + (opts.multi ? "multiple" : "") + " accept=\"" + opts.fileExt + "\" />";
             $this.after(thtml)
             //$this.attr("for", tid);
             $this.bind("click", function () {
@@ -25,12 +25,21 @@
                 }
                 if (selFiles != null && selFiles.length > 0) {
                     if (!checkFileSize(selFiles, opts.fileSize)) {
-                        alert(opts.alertContentWhenSize);
-                        return;
+                        if (opts.funcWhenSize == null) {
+                            alert(opts.alertContentWhenSize);
+                            return;
+                        } else {
+                            opts.funcWhenSize();
+                            return;
+                        }
                     }
                     if (!checkFileExt(selFiles, opts.fileExt)) {
-                        alert(opts.alertContentWhenSize);
-                        return;
+                        if (opts.funcWhenExt == null) {
+                            alert(opts.alertContentWhenSize);
+                            return;
+                        } else {
+                            opts.funcWhenExt();
+                        }
                     }
                     if (!opts.multi)
                         files = [];
@@ -38,15 +47,23 @@
                         files.push(selFiles[ii]);
                     var cnt = "";
                     for (var index = 0; index < files.length; index++) {
-                        cnt += (opts.fileWaitingTmpl.replace("[filename]",selFiles[index].name).replace("[filesize]",Math.round(parseFloat(parseFloat(selFiles[index].size) / 1024), 2) + 'KB'));
+                        cnt += (opts.fileWaitingTmpl.replace("[filename]", selFiles[index].name).replace("[filesize]", Math.round(parseFloat(parseFloat(selFiles[index].size) / 1024), 2) + 'KB'));
                     }
                     if (opts.fileWaitingContainer != null && opts.fileWaitingContainer != "")
                         $(opts.fileWaitingContainer).html(cnt);
                 }
-
             });
             if (opts.buttonUpload != null && opts.buttonUpload != "") {
                 $(opts.buttonUpload).bind("click", function () {
+                    if (files.length < 1) {
+                        if (opts.funcWhenNoFile == null) {
+                            if (opts.alertContentWhenNoFile != null && opts.alertContentWhenNoFile != "")
+                                alert(opts.alertContentWhenNoFile);
+                        } else {
+                            opts.funcWhenNoFile();
+                        }
+                        return;
+                    }
                     var oData = new FormData();
                     for (var ii = 0; ii < files.length; ii++)
                         oData.append("Filedata" + ii, files[ii]);
@@ -122,6 +139,10 @@
         fileExt: "*.gif;*.png;*.pdf;*.jpg;*.txt;",
         alertContentWhenSize: "文件大小超限了！",
         alertContentWhenExt: "文件格式不符合要求！",
+        alertContentWhenNoFile: "您至少需要上传一个文件！",
+        funcWhenSize: null,
+        funcWhenExt: null,
+        funcWhenNoFile:null,
         fileWaitingContainer : "",//待上传文件列表存放在哪个元素
         fileWaitingTmpl : "<span>[filename] [filesize]</span>",//待上传文件列表的内容模板
         buttonUpload: "input",//上传动作的钮
