@@ -39,6 +39,7 @@
                             return;
                         } else {
                             opts.funcWhenExt();
+                            return;
                         }
                     }
                     if (!opts.multi)
