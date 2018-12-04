@@ -12,7 +12,7 @@
         return this.each(function () {
             $this = $(this);
             var tid = "FileZUpload" + (i++);
-            var thtml = "<input type=\"file\" id=\"" + tid + "\" style=\"display: none\" " + (opts.multi ? "multiple" : "") + " accept=\"" + opts.fileExt + "\" />";
+            var thtml = "<input type=\"file\" id=\"" + tid + "\" style=\"display: none\" " + (opts.multi ? "multiple" : "") + " accept=\"" + opts.accept + "\" />";
             $this.after(thtml)
             //$this.attr("for", tid);
             $this.bind("click", function () {
@@ -137,6 +137,7 @@
         alertContentWhenUnsuport : "您的浏览器版本太低,不支持上传功能,请升级浏览器!", //不支持时提示的内容
         fileSize: 1, //文件大小限制，单位（M）
         fileExt: "*.gif;*.png;*.pdf;*.jpg;*.txt;",
+        accept:"image/*,text/plain",
         alertContentWhenSize: "文件大小超限了！",
         alertContentWhenExt: "文件格式不符合要求！",
         alertContentWhenNoFile: "您至少需要上传一个文件！",
