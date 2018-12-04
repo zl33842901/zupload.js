@@ -12,12 +12,12 @@
         return this.each(function () {
             $this = $(this);
             var tid = "FileZUpload" + (i++);
-            var thtml = "<input type=\"file\" id=\"" + tid + "\" style=\"display: none\" " + (opts.multi ? "multiple" : "") + " accept=\"" + opts.accept + "\" />";
+            var thtml = "<input type=\"file\" id=\"" + tid + "\" style=\"visibility:hidden\" " + (opts.multi ? "multiple" : "") + " accept=\"" + opts.accept + "\" />";
             $this.after(thtml)
             //$this.attr("for", tid);
             $this.bind("click", function () {
                 $("#" + tid).click();
-            });
+            }); 
             $("#" + tid).bind("change", function (e) {
                 var selFiles;
                 if (e.target.files.length || e.dataTransfer.files.length) {
