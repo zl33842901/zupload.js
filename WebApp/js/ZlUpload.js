@@ -1,5 +1,6 @@
+//zupload ä¸Šä¼ æ’ä»¶ https://github.com/zl33842901/zupload.js
 (function ($) {
-    // ²å¼şµÄ¶¨Òå     
+    // æ’ä»¶çš„å®šä¹‰     
     $.fn.ZUpload = function (options) {
         debug(this);
         var opts = $.extend({}, $.fn.ZUpload.defaults, options);
@@ -73,7 +74,7 @@
                     console.log(oData);
                     var oReq = new XMLHttpRequest();
                     oReq.open("POST", opts.url, true);
-                    //¸ù¾İ·µ»Ø×´Ì¬½øĞĞÏàÓ¦´¦Àí
+                    //æ ¹æ®è¿”å›çŠ¶æ€è¿›è¡Œç›¸åº”å¤„ç†
                     oReq.onreadystatechange = function (e) {
                         if (oReq.readyState === 4) {
                             if (oReq.status === 200) {
@@ -100,12 +101,12 @@
             //$this.html(markup);
         });
     };
-    //Ë½ÓĞ·½·¨
+    //ç§æœ‰æ–¹æ³•
     function debug($obj) {
         if (window.console && window.console.log)
             window.console.log('ZUpload count: ' + $obj.size());
     };
-    //¼ì²éÎÄ¼şµÄÀàĞÍºÍ´óĞ¡ÏŞÖÆ
+    //æ£€æŸ¥æ–‡ä»¶çš„ç±»å‹å’Œå¤§å°é™åˆ¶
     function checkFileSize(files, fileSize) {
         for (var index = 0; index < files.length; index++) {
             var file = files[index];
@@ -126,30 +127,30 @@
         }
         return true;
     }
-    //¹«ÓĞ·½·¨
+    //å…¬æœ‰æ–¹æ³•
     //$.fn.ZUpload.Upload = function () {
     //    alert(this);
     //    return '';
     //};
-    //Ä¬ÈÏ²ÎÊı
+    //é»˜è®¤å‚æ•°
     $.fn.ZUpload.defaults = {
-        multi : true, //ÊÇ·ñ¶àÎÄ¼şÉÏ´«
-        alertWhenUnsuport : true, //²»Ö§³ÖFormData Ê±ÊÇ·ñÌáÊ¾
-        alertContentWhenUnsuport : "ÄúµÄä¯ÀÀÆ÷°æ±¾Ì«µÍ,²»Ö§³ÖÉÏ´«¹¦ÄÜ,ÇëÉı¼¶ä¯ÀÀÆ÷!", //²»Ö§³ÖÊ±ÌáÊ¾µÄÄÚÈİ
-        fileSize: 1, //ÎÄ¼ş´óĞ¡ÏŞÖÆ£¬µ¥Î»£¨M£©
+        multi : true, //æ˜¯å¦å¤šæ–‡ä»¶ä¸Šä¼ 
+        alertWhenUnsuport : true, //ä¸æ”¯æŒFormData æ—¶æ˜¯å¦æç¤º
+        alertContentWhenUnsuport : "æ‚¨çš„æµè§ˆå™¨ç‰ˆæœ¬å¤ªä½,ä¸æ”¯æŒä¸Šä¼ åŠŸèƒ½,è¯·å‡çº§æµè§ˆå™¨!", //ä¸æ”¯æŒæ—¶æç¤ºçš„å†…å®¹
+        fileSize: 1, //æ–‡ä»¶å¤§å°é™åˆ¶ï¼Œå•ä½ï¼ˆMï¼‰
         fileExt: "*.gif;*.png;*.pdf;*.jpg;*.txt;",
         accept:"image/*,text/plain",
-        alertContentWhenSize: "ÎÄ¼ş´óĞ¡³¬ÏŞÁË£¡",
-        alertContentWhenExt: "ÎÄ¼ş¸ñÊ½²»·ûºÏÒªÇó£¡",
-        alertContentWhenNoFile: "ÄúÖÁÉÙĞèÒªÉÏ´«Ò»¸öÎÄ¼ş£¡",
+        alertContentWhenSize: "æ–‡ä»¶å¤§å°è¶…é™äº†ï¼",
+        alertContentWhenExt: "æ–‡ä»¶æ ¼å¼ä¸ç¬¦åˆè¦æ±‚ï¼",
+        alertContentWhenNoFile: "æ‚¨è‡³å°‘éœ€è¦ä¸Šä¼ ä¸€ä¸ªæ–‡ä»¶ï¼",
         funcWhenSize: null,
         funcWhenExt: null,
         funcWhenNoFile:null,
-        fileWaitingContainer : "",//´ıÉÏ´«ÎÄ¼şÁĞ±í´æ·ÅÔÚÄÄ¸öÔªËØ
-        fileWaitingTmpl : "<span>[filename] [filesize]</span>",//´ıÉÏ´«ÎÄ¼şÁĞ±íµÄÄÚÈİÄ£°å
-        buttonUpload: "input",//ÉÏ´«¶¯×÷µÄÅ¥
+        fileWaitingContainer : "",//å¾…ä¸Šä¼ æ–‡ä»¶åˆ—è¡¨å­˜æ”¾åœ¨å“ªä¸ªå…ƒç´ 
+        fileWaitingTmpl : "<span>[filename] [filesize]</span>",//å¾…ä¸Šä¼ æ–‡ä»¶åˆ—è¡¨çš„å†…å®¹æ¨¡æ¿
+        buttonUpload: "input",//ä¸Šä¼ åŠ¨ä½œçš„é’®
         url : "/",
-        params: {},//ÉÏ´«²ÎÊı
+        params: {},//ä¸Šä¼ å‚æ•°
         onSuccess: function (res) { alert(res); },
         onFailure: function (res) { alert(res); }
     };
